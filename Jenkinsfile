@@ -1,16 +1,16 @@
 pipeline {
     agent any
-     tools {
-          maven 'maven'
-     }
+  
     stages {
-
-        stage('Checkout') {
-           steps {
-                checkout scm
-           }
+ stage('Pull Repository') {
+            steps {
+                // Pull the repository source code from Git
+                git branch: 'master', url: 'https://github.com/Jlassi25/jenkins-test.git'
+            }
         }
+    
         stage('Build Spring') {
+            
             steps {
                 sh "mvn clean install"
 
@@ -19,14 +19,14 @@ pipeline {
         stage('Build docker image') {
             steps {
              script{
-                sh 'docker build -t firstSpring .'
+                sh 'docker build -t firstspring .'
              }
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run -d -p 8084:8084 firstSpring'
+                    sh 'docker run -d -p 8080:8080 firstspring'
                 }
             }
         }
