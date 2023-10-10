@@ -1,9 +1,6 @@
 pipeline {
     agent any
-  tools { 
-      maven 'MAVEN_HOME' 
-      jdk 'JAVA_HOME' 
-    }
+  
     stages {
  stage('Pull Repository') {
             steps {
@@ -15,7 +12,7 @@ pipeline {
         stage('Build Spring') {
             
             steps {
-                      sh 'mvn clean install '
+                sh "mvn clean install"
 
             }
         }
