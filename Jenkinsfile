@@ -15,7 +15,7 @@ pipeline {
         stage('Build Spring') {
             
             steps {
-                      sh 'mvn clean package '
+                      sh 'mvn clean install '
 
             }
         }
